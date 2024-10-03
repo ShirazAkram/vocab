@@ -7,11 +7,10 @@ const axios = require('axios');
 const Word = require('./models/Word');
 
 const app = express();
-app.use(express.json()); // To parse JSON bodies
+app.use(express.json()); 
 
 const PORT = process.env.PORT || 3000;
 
-// Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -21,7 +20,6 @@ mongoose.connect(process.env.MONGODB_URI, {
     console.log('Error connecting to MongoDB', error);
 });
 
-// Get all words
 app.get('/api/words', async (req, res) => {
     try {
         const words = await Word.find({});
@@ -31,7 +29,6 @@ app.get('/api/words', async (req, res) => {
     }
 });
 
-// Add a new word
 app.post('/api/words', async (req, res) => {
     const { word } = req.body;
 
